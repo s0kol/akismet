@@ -1,5 +1,5 @@
 {
-    "name": "kenmoini/akismet",
+    "name": "johnhout/akismet",
     "description": "Laravel 4 Akismet SPAM Processing Engine",
 	"keywords": ["laravel","akismet","spam"],
 	"homepage": "https://github.com/kenmoini/akismet",
