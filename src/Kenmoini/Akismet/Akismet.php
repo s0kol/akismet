@@ -192,8 +192,8 @@ class Akismet {
 	 *
 	 * Uses the web service provided by {@link http://www.akismet.com Akismet} to see whether or not the submitted comment is spam.  Returns a boolean value.
 	 *
-	 * @return	bool	True if the comment is spam, false if not
-	 * @throws	Will throw an exception if the API key passed to the constructor is invalid.
+	 * @throws exception
+	 * @return bool    True if the comment is spam, false if not
 	 */
 	public function isCommentSpam() {
 		$response = $this->sendRequest($this->getQueryString(), $this->wordPressAPIKey . '.rest.akismet.com', '/' . $this->akismetVersion . '/comment-check');
@@ -254,13 +254,17 @@ class Akismet {
 	 * The type of comment being submitted.
 	 *
 	 * May be blank, comment, trackback, pingback, or a made up value like "registration" or "wiki".
+	 *
+	 * @param $commentType
 	 */
 	public function setCommentType($commentType) {
 		$this->comment['comment_type'] = $commentType;
 	}
 
 	/**
-	 *	The name that the author submitted with the comment.
+	 *    The name that the author submitted with the comment.
+	 *
+	 * @param $commentAuthor
 	 */
 	public function setCommentAuthor($commentAuthor) {
 		$this->comment['comment_author'] = $commentAuthor;
@@ -270,6 +274,8 @@ class Akismet {
 	 * The email address that the author submitted with the comment.
 	 *
 	 * The address is assumed to be valid.
+	 *
+	 * @param $authorEmail
 	 */
 	public function setCommentAuthorEmail($authorEmail) {
 		$this->comment['comment_author_email'] = $authorEmail;
@@ -277,6 +283,8 @@ class Akismet {
 
 	/**
 	 * The URL that the author submitted with the comment.
+	 *
+	 * @param $authorURL
 	 */
 	public function setCommentAuthorURL($authorURL) {
 		$this->comment['comment_author_url'] = $authorURL;
@@ -284,6 +292,8 @@ class Akismet {
 
 	/**
 	 * The comment's body text.
+	 *
+	 * @param $commentBody
 	 */
 	public function setCommentContent($commentBody) {
 		$this->comment['comment_content'] = $commentBody;
@@ -293,6 +303,8 @@ class Akismet {
 	 * Lets you override the user agent used to submit the comment.
 	 * you may wish to do this when submitting ham/spam.
 	 * Defaults to $_SERVER['HTTP_USER_AGENT']
+	 *
+	 * @param $userAgent
 	 */
 	public function setCommentUserAgent($userAgent) {
 		$this->comment['user_agent'] = $userAgent;
@@ -300,6 +312,8 @@ class Akismet {
 
 	/**
 	 * Defaults to 80
+	 *
+	 * @param $apiPort
 	 */
 	public function setAPIPort($apiPort) {
 		$this->apiPort = $apiPort;
@@ -307,6 +321,8 @@ class Akismet {
 
 	/**
 	 * Defaults to rest.akismet.com
+	 *
+	 * @param $akismetServer
 	 */
 	public function setAkismetServer($akismetServer) {
 		$this->akismetServer = $akismetServer;
@@ -359,12 +375,13 @@ class SocketWriteRead implements AkismetRequestSender {
 	/**
 	 *  Sends the data to the remote host.
 	 *
-	 * @param	string	$host			The host to send/receive data.
-	 * @param	int		$port			The port on the remote host.
-	 * @param	string	$request		The data to send.
-	 * @param	int		$responseLength	The amount of data to read.  Defaults to 1160 bytes.
-	 * @throws	An exception is thrown if a connection cannot be made to the remote host.
-	 * @returns	The server response
+	 * @param    string $host           The host to send/receive data.
+	 * @param    int    $port           The port on the remote host.
+	 * @param    string $request        The data to send.
+	 * @param    int    $responseLength The amount of data to read.  Defaults to 1160 bytes.
+	 *
+	 * @throws Exception
+	 * @returns    The server response
 	 */
 	public function send($host, $port, $request, $responseLength = 1160) {
 		$response = '';
